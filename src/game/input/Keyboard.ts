@@ -29,20 +29,18 @@ window.addEventListener(
   'keydown',
   (event) => {
     if (!gameplayCodes.has(event.code)) return;
-    event.preventDefault();
     held.add(event.code);
   },
-  { capture: true, passive: false },
+  { capture: true },
 );
 
 window.addEventListener(
   'keyup',
   (event) => {
     if (!gameplayCodes.has(event.code)) return;
-    event.preventDefault();
     held.delete(event.code);
   },
-  { capture: true, passive: false },
+  { capture: true },
 );
 
 window.addEventListener('blur', () => held.clear());
@@ -52,4 +50,8 @@ document.addEventListener('visibilitychange', () => {
 
 export function isHeld(...codes: string[]): boolean {
   return codes.some((code) => held.has(code));
+}
+
+export function isGameplayCode(code: string): boolean {
+  return gameplayCodes.has(code);
 }

@@ -13,6 +13,7 @@ import { GameScene } from './game/scenes/GameScene';
 import { UIScene } from './game/ui/Hud';
 import { GameOverScene } from './game/scenes/GameOverScene';
 import { music } from './game/audio/Music';
+import { isGameplayCode } from './game/input/Keyboard';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -48,6 +49,15 @@ game.canvas.setAttribute('aria-label', 'NOVASTRIKE game canvas');
 game.canvas.addEventListener('pointerdown', () => {
   game.canvas.focus({ preventScroll: true });
 });
+// Registered after Phaser's keyboard manager so Phaser receives the event
+// before the browser-default flag is set.
+window.addEventListener(
+  'keydown',
+  (event) => {
+    if (isGameplayCode(event.code)) event.preventDefault();
+  },
+  { passive: false },
+);
 
 game.events.on(Phaser.Core.Events.BLUR, () => music.pause());
 game.events.on(Phaser.Core.Events.FOCUS, () => music.resume());
