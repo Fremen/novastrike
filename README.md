@@ -1,5 +1,21 @@
 # NOVASTRIKE
 
+A browser game by [Dave Fleming](https://www.linkedin.com/in/davejfleming): a hands-on project combining interactive software, procedural graphics and synthesised audio.
+
+**[Play in your browser](https://fremen.github.io/novastrike/)** · [Explore the source](src/) · [Build and deployment workflow](.github/workflows/deploy.yml)
+
+## Engineering highlights
+
+- **TypeScript, Phaser 3 and Vite:** scene-based gameplay with separate systems for weapons, enemies, levels and audio.
+- **Procedural assets:** palette-indexed sprites, bitmap fonts and layered backgrounds generated from source.
+- **Web Audio:** a four-channel tracker synthesises the soundtrack in the browser.
+- **Iteration:** balancing parameters and scripted waves are kept separate from the game engine.
+- **Browser delivery:** no backend; local high scores use browser storage.
+
+This is a personal game project, not evidence of enterprise production scale. The code and build instructions below make the implementation inspectable.
+
+## The game
+
 A complete Amiga-style side-scrolling shoot-'em-up in the spirit of
 **Project-X, Apidya, R-Type and Xenon 2** — built with TypeScript,
 Phaser 3 and Vite. Runs entirely in the browser, no backend.
