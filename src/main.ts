@@ -41,6 +41,42 @@ const config: Phaser.Types.Core.GameConfig = {
 
 const game = new Phaser.Game(config);
 
+// Keep keyboard control attached to the game after pointer interaction and stop
+// browser navigation/scroll shortcuts from stealing gameplay input.
+const gameplayKeys = new Set([
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'w',
+  'a',
+  's',
+  'd',
+  'W',
+  'A',
+  'S',
+  'D',
+  ' ',
+  'z',
+  'x',
+  'Z',
+  'X',
+  'Shift',
+]);
+
+game.canvas.tabIndex = 0;
+game.canvas.setAttribute('aria-label', 'NOVASTRIKE game canvas');
+game.canvas.addEventListener('pointerdown', () => {
+  game.canvas.focus({ preventScroll: true });
+});
+window.addEventListener(
+  'keydown',
+  (event) => {
+    if (gameplayKeys.has(event.key)) event.preventDefault();
+  },
+  { passive: false },
+);
+
 game.events.on(Phaser.Core.Events.BLUR, () => music.pause());
 game.events.on(Phaser.Core.Events.FOCUS, () => music.resume());
 document.addEventListener('visibilitychange', () => {
