@@ -9,7 +9,7 @@
 import Phaser from 'phaser';
 import { PLAYER, SCREEN } from '../config/Balance';
 import { sfx } from '../audio/Sfx';
-import { isHeld } from '../input/Keyboard';
+import { consumePressed, isHeld } from '../input/Keyboard';
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   shield = PLAYER.startShield;
@@ -59,7 +59,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   /** edge-triggered bomb input — call once per frame */
   get bombPressed(): boolean {
-    if (Phaser.Input.Keyboard.JustDown(this.keys.X)) return true;
+    if (Phaser.Input.Keyboard.JustDown(this.keys.X) || consumePressed('KeyX')) return true;
     const pad = this.pad();
     if (pad) {
       const now = pad.B;

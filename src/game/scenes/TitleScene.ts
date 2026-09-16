@@ -12,6 +12,7 @@ import { loadScores } from '../systems/HighScores';
 import { CrtOverlay } from '../effects/Crt';
 import { sfx } from '../audio/Sfx';
 import { music } from '../audio/Music';
+import { consumePressed } from '../input/Keyboard';
 
 export class TitleScene extends Phaser.Scene {
   private stars!: Phaser.GameObjects.TileSprite;
@@ -83,13 +84,6 @@ export class TitleScene extends Phaser.Scene {
     this.crt = new CrtOverlay(this, 1000);
 
     const kb = this.input.keyboard!;
-    kb.on('keydown-UP', () => this.move(-1));
-    kb.on('keydown-DOWN', () => this.move(1));
-    kb.on('keydown-W', () => this.move(-1));
-    kb.on('keydown-S', () => this.move(1));
-    kb.on('keydown-SPACE', () => this.select());
-    kb.on('keydown-Z', () => this.select());
-    kb.on('keydown-ENTER', () => this.select());
     this.input.on('pointerdown', () => this.unlockAudio());
     kb.on('keydown', () => this.unlockAudio());
 
@@ -128,6 +122,9 @@ export class TitleScene extends Phaser.Scene {
     this.stars.tilePositionX += (delta / 1000) * 6;
     this.nebula.tilePositionX += (delta / 1000) * 14;
     this.prompt.setVisible(Math.floor(time / 500) % 2 === 0);
+    if (consumePressed('ArrowUp', 'KeyW')) this.move(-1);
+    if (consumePressed('ArrowDown', 'KeyS')) this.move(1);
+    if (consumePressed('Space', 'KeyZ', 'Enter')) this.select();
     // gamepad start
     const pad = this.input.gamepad && this.input.gamepad.total > 0 ? this.input.gamepad.getPad(0) : null;
     if (pad) {

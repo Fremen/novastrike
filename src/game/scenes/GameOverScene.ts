@@ -9,6 +9,7 @@ import Phaser from 'phaser';
 import { SCREEN } from '../config/Balance';
 import { loadScores, qualifies, saveScore } from '../systems/HighScores';
 import { CrtOverlay } from '../effects/Crt';
+import { consumePressed } from '../input/Keyboard';
 import { sfx } from '../audio/Sfx';
 import { music } from '../audio/Music';
 
@@ -84,16 +85,6 @@ export class GameOverScene extends Phaser.Scene {
 
     this.crt = new CrtOverlay(this, 1000);
 
-    const kb = this.input.keyboard!;
-    kb.on('keydown-UP', () => this.cycle(1));
-    kb.on('keydown-DOWN', () => this.cycle(-1));
-    kb.on('keydown-W', () => this.cycle(1));
-    kb.on('keydown-S', () => this.cycle(-1));
-    kb.on('keydown-LEFT', () => this.moveSlot(-1));
-    kb.on('keydown-RIGHT', () => this.moveSlot(1));
-    kb.on('keydown-SPACE', () => this.confirm());
-    kb.on('keydown-Z', () => this.confirm());
-    kb.on('keydown-ENTER', () => this.confirm());
   }
 
   private cycle(dir: number): void {
@@ -163,6 +154,11 @@ export class GameOverScene extends Phaser.Scene {
 
   update(time: number): void {
     this.crt.flicker(time);
+    if (consumePressed('ArrowUp', 'KeyW')) this.cycle(1);
+    if (consumePressed('ArrowDown', 'KeyS')) this.cycle(-1);
+    if (consumePressed('ArrowLeft', 'KeyA')) this.moveSlot(-1);
+    if (consumePressed('ArrowRight', 'KeyD')) this.moveSlot(1);
+    if (consumePressed('Space', 'KeyZ', 'Enter')) this.confirm();
     const pad = this.input.gamepad && this.input.gamepad.total > 0 ? this.input.gamepad.getPad(0) : null;
     if (pad?.A && this.done) this.confirm();
   }
