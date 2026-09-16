@@ -53,7 +53,7 @@ npm run spritesheet
 | Arrow keys / WASD / gamepad stick | 8-way movement |
 | SPACE / Z / gamepad A / R2 | Fire (hold) |
 | X / gamepad B | Smart bomb |
-| A | Toggle auto-fire (on by default) |
+| F | Toggle auto-fire (on by default) |
 | P | Pause |
 | C | CRT scanline overlay on/off |
 | M | Mute |

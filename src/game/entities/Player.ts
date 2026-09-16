@@ -9,6 +9,7 @@
 import Phaser from 'phaser';
 import { PLAYER, SCREEN } from '../config/Balance';
 import { sfx } from '../audio/Sfx';
+import { isHeld } from '../input/Keyboard';
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   shield = PLAYER.startShield;
@@ -51,6 +52,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     return (
       this.keys.SPACE.isDown ||
       this.keys.Z.isDown ||
+      isHeld('Space', 'KeyZ') ||
       (pad ? pad.A || pad.R2 > 0.4 : false)
     );
   }
@@ -77,10 +79,18 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     const pad = this.pad();
     let dx = 0;
     let dy = 0;
-    if (this.keys.LEFT.isDown || this.keys.A.isDown) dx -= 1;
-    if (this.keys.RIGHT.isDown || this.keys.D.isDown) dx += 1;
-    if (this.keys.UP.isDown || this.keys.W.isDown) dy -= 1;
-    if (this.keys.DOWN.isDown || this.keys.S.isDown) dy += 1;
+    if (this.keys.LEFT.isDown || this.keys.A.isDown || isHeld('ArrowLeft', 'KeyA')) {
+      dx -= 1;
+    }
+    if (this.keys.RIGHT.isDown || this.keys.D.isDown || isHeld('ArrowRight', 'KeyD')) {
+      dx += 1;
+    }
+    if (this.keys.UP.isDown || this.keys.W.isDown || isHeld('ArrowUp', 'KeyW')) {
+      dy -= 1;
+    }
+    if (this.keys.DOWN.isDown || this.keys.S.isDown || isHeld('ArrowDown', 'KeyS')) {
+      dy += 1;
+    }
     if (pad) {
       const lx = pad.leftStick.x;
       const ly = pad.leftStick.y;

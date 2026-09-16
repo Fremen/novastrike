@@ -129,7 +129,7 @@ export class UIScene extends Phaser.Scene {
       sfx.setMuted(!sfx.muted);
       this.showToast(sfx.muted ? 'SOUND OFF' : 'SOUND ON');
     });
-    kb.on('keydown-A', () => {
+    kb.on('keydown-F', () => {
       const g = this.scene.get('Game') as Phaser.Scene & {
         player?: { autofire: boolean };
       };
