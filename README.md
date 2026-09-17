@@ -158,3 +158,10 @@ list of `(time, spawn)` events.
 - Natural extensions: two-player co-op (second Player + input map),
   achievements, and input-log replays — the scene/event architecture was
   laid out so these bolt on without restructuring.
+
+
+## Touch controls
+
+On touchscreen devices, controls appear below the game. Use the direction pad to move and navigate menus, Fire to shoot, and Special for the bomb. Start confirms menu selections. Multiple controls can be held together. Inputs release on cancelled touches or when switching away from the app. Landscape gives more horizontal room.
+
+The game viewport reserves space for the control panel and its safe-area padding. Mobile input lifecycle checks pass; physical iPhone Safari performance and playability still need device testing.
