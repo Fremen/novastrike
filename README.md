@@ -4,6 +4,8 @@ A browser game by [Dave Fleming](https://www.linkedin.com/in/davejfleming): a ha
 
 **[Play in your browser](https://fremen.github.io/novastrike/)** · [Explore the source](src/) · [Build and deployment workflow](.github/workflows/deploy.yml)
 
+![NOVASTRIKE title screen](docs/screenshot.jpg)
+
 ## Engineering highlights
 
 - **TypeScript, Phaser 3 and Vite:** scene-based gameplay with separate systems for weapons, enemies, levels and audio.
@@ -164,4 +166,4 @@ list of `(time, spawn)` events.
 
 On touchscreen devices, controls appear below the game. Use the direction pad to move and navigate menus, Fire to shoot, and Special for the bomb. Start confirms menu selections. Multiple controls can be held together. Inputs release on cancelled touches or when switching away from the app. Landscape gives more horizontal room.
 
-The game viewport reserves space for the control panel and its safe-area padding. Mobile input lifecycle checks pass; physical iPhone Safari performance and playability still need device testing.
+The game viewport reserves space for the control panel and its safe-area padding. Touch controls and playability have been tested on iPhone Safari. Landscape gives the game and control panel more room.
